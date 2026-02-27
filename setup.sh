@@ -834,3 +834,6 @@ EOF
 # Troubleshooting lesson: trace example shows "notes.txt has 42 lines" and "report.txt has 157 lines"
 for i in {1..42}; do echo "Line $i"; done > "$CHAPTER13/notes.txt"
 for i in {1..157}; do echo "Report line $i"; done > "$CHAPTER13/report.txt"
+
+
+echo "The setup.sh script has finished running. All practice files have been created."
