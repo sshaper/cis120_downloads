@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Install tree, locate (mlocate), and find (findutils) if not already present.
+# Safe to run multiple times: only runs the package manager when a command is missing.
+if ! command -v tree &>/dev/null; then
+    sudo apt-get update -qq && sudo apt-get install -y tree
+fi
+if ! command -v locate &>/dev/null; then
+    sudo apt-get update -qq && sudo apt-get install -y mlocate
+fi
+if ! command -v find &>/dev/null; then
+    sudo apt-get update -qq && sudo apt-get install -y findutils
+fi
+
 mkdir -p ~/assignments/assignment{1..12}
 mkdir -p ~/playground/chapter{1..13}
 
