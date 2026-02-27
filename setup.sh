@@ -399,3 +399,143 @@ Line two modified
 Line three
 Line five
 EOF
+
+# Chapter 4: practice files for expansion lesson (pathname, tilde, brace examples)
+CHAPTER4=~/playground/chapter4
+mkdir -p "$CHAPTER4"
+
+# Pathname expansion: *.txt, file?.txt
+cat > "$CHAPTER4/file1.txt" << 'EOF'
+first
+EOF
+cat > "$CHAPTER4/file2.txt" << 'EOF'
+second
+EOF
+cat > "$CHAPTER4/file3.txt" << 'EOF'
+third
+EOF
+cat > "$CHAPTER4/fileA.txt" << 'EOF'
+file A
+EOF
+
+# [a-c]*.jpg, *[0-9]*, [!0-9]*, [[:alpha:]]*
+touch "$CHAPTER4/a.jpg" "$CHAPTER4/b.jpg" "$CHAPTER4/c.jpg"
+cat > "$CHAPTER4/doc1.txt" << 'EOF'
+doc 1
+EOF
+cat > "$CHAPTER4/doc2.txt" << 'EOF'
+doc 2
+EOF
+cat > "$CHAPTER4/alpha.txt" << 'EOF'
+alpha
+EOF
+cat > "$CHAPTER4/beta.txt" << 'EOF'
+beta
+EOF
+
+# *.{txt,md}, *.{jpg,png,gif}
+cat > "$CHAPTER4/readme.md" << 'EOF'
+# Readme
+EOF
+cat > "$CHAPTER4/notes.md" << 'EOF'
+# Notes
+EOF
+touch "$CHAPTER4/image1.jpg" "$CHAPTER4/image2.png" "$CHAPTER4/image3.gif"
+
+# *[0-9][a-z].txt
+cat > "$CHAPTER4/file1a.txt" << 'EOF'
+file 1a
+EOF
+cat > "$CHAPTER4/file2b.txt" << 'EOF'
+file 2b
+EOF
+
+# **/*.txt (subdirectory with .txt file)
+mkdir -p "$CHAPTER4/subdir"
+cat > "$CHAPTER4/subdir/other.txt" << 'EOF'
+in subdir
+EOF
+
+# quotes lesson: file with space in name (for mv "Old Name.txt" "New Name.txt" example)
+cat > "$CHAPTER4/Old Name.txt" << 'EOF'
+old file with space in name
+EOF
+
+# Chapter 4: locate and find lesson — practice directory for locate/find examples
+LOCATE_FIND="$CHAPTER4/locate_find"
+mkdir -p "$LOCATE_FIND"
+mkdir -p "$LOCATE_FIND/test"
+
+# locate "homework"
+cat > "$LOCATE_FIND/homework1.txt" << 'EOF'
+homework 1
+EOF
+cat > "$LOCATE_FIND/homework2.txt" << 'EOF'
+homework 2
+EOF
+touch "$LOCATE_FIND/my_homework.pdf"
+
+# locate -i "report" (Report.pdf, REPORT.txt, weekly_report)
+touch "$LOCATE_FIND/Report.pdf"
+cat > "$LOCATE_FIND/REPORT.txt" << 'EOF'
+REPORT content
+EOF
+cat > "$LOCATE_FIND/weekly_report.txt" << 'EOF'
+weekly report
+EOF
+
+# locate -n 5 "*.pdf" and locate -c "*.py"
+touch "$LOCATE_FIND/sample1.pdf" "$LOCATE_FIND/sample2.pdf" "$LOCATE_FIND/sample3.pdf"
+touch "$LOCATE_FIND/sample4.pdf" "$LOCATE_FIND/sample5.pdf" "$LOCATE_FIND/sample6.pdf"
+cat > "$LOCATE_FIND/file1.py" << 'EOF'
+print("file1")
+EOF
+cat > "$LOCATE_FIND/file2.py" << 'EOF'
+print("file2")
+EOF
+cat > "$LOCATE_FIND/script.py" << 'EOF'
+print("script")
+EOF
+
+# find . -name "*.txt", . -empty, . -perm 0777
+cat > "$LOCATE_FIND/notes.txt" << 'EOF'
+notes
+EOF
+cat > "$LOCATE_FIND/data.txt" << 'EOF'
+data
+EOF
+touch "$LOCATE_FIND/empty.txt"
+# empty directory already created as locate_find/test; add another empty dir
+mkdir -p "$LOCATE_FIND/empty_dir"
+touch "$LOCATE_FIND/insecure.txt"
+chmod 0777 "$LOCATE_FIND/insecure.txt" 2>/dev/null || true
+
+# find . \( -name "*.png" -or -name "*.jpg" \)
+touch "$LOCATE_FIND/image1.png" "$LOCATE_FIND/image2.jpg"
+
+# find . \( -name "*.docx" -o -name "*.pdf" \)
+touch "$LOCATE_FIND/doc1.docx"
+touch "$LOCATE_FIND/doc2.pdf"
+
+# find . -type f \( -name "*.java" -o -name "*.py" \) -not -path "*/test/*"
+cat > "$LOCATE_FIND/Main.java" << 'EOF'
+public class Main { }
+EOF
+cat > "$LOCATE_FIND/main.py" << 'EOF'
+print("main")
+EOF
+cat > "$LOCATE_FIND/test/Test.java" << 'EOF'
+public class Test { }
+EOF
+cat > "$LOCATE_FIND/test/test.py" << 'EOF'
+print("test")
+EOF
+
+# find . -type f -executable -not -name "*.sh" (one executable without .sh)
+cat > "$LOCATE_FIND/run_me" << 'EOF'
+#!/bin/bash
+echo "run_me"
+EOF
+chmod +x "$LOCATE_FIND/run_me" 2>/dev/null || true
+
+# Reminder: run "sudo updatedb" after setup so locate finds these files
