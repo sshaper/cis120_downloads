@@ -519,6 +519,11 @@ EOF
 touch "$LOCATE_FIND/empty.txt"
 # empty directory already created as locate_find/test; add another empty dir
 mkdir -p "$LOCATE_FIND/empty_dir"
+
+# find . -type f -size +100M and find . -type f -size +10M -size -100M (practice files)
+dd if=/dev/zero of="$LOCATE_FIND/large_file.dat" bs=1M count=150 2>/dev/null || true
+dd if=/dev/zero of="$LOCATE_FIND/medium_file.dat" bs=1M count=50 2>/dev/null || true
+
 touch "$LOCATE_FIND/insecure.txt"
 chmod 0777 "$LOCATE_FIND/insecure.txt" 2>/dev/null || true
 
