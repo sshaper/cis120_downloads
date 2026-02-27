@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Install tree, locate (mlocate), and find (findutils) if not already present.
+# Install tree, locate (plocate), and find (findutils) if not already present.
 # Safe to run multiple times: only runs the package manager when a command is missing.
 if ! command -v tree &>/dev/null; then
     sudo apt-get update -qq && sudo apt-get install -y tree
 fi
 if ! command -v locate &>/dev/null; then
-    sudo apt-get update -qq && sudo apt-get install -y mlocate
+    sudo apt-get update -qq && sudo apt-get install -y plocate
 fi
 if ! command -v find &>/dev/null; then
     sudo apt-get update -qq && sudo apt-get install -y findutils
