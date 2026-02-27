@@ -75,7 +75,7 @@ Line with    spaces
 Normal line
 EOF
 
-# Chapter 2: practice files and dirs for cp, mv, rm, wildcards, ln, less
+# Chapter 2: practice files and dirs for cp, mv, rm, wildcards, ln, less; FHS and disk_storage (df, du, lsblk, mount) use the live system — no extra practice files
 CHAPTER2=~/playground/chapter2
 mkdir -p "$CHAPTER2"
 
@@ -556,3 +556,281 @@ EOF
 chmod +x "$LOCATE_FIND/run_me" 2>/dev/null || true
 
 # Reminder: run "sudo updatedb" after setup so locate finds these files
+
+# Chapter 6: jobs, fg, bg lesson — script that writes a count to a file every 5 seconds
+# Students run it in foreground (fg) or background (bg) and watch the output file to see the difference.
+CHAPTER6=~/playground/chapter6
+mkdir -p "$CHAPTER6"
+cat > "$CHAPTER6/count_loop.sh" << 'COUNTEOF'
+#!/bin/bash
+# For the jobs/fg/bg lesson: writes a counter to a file every 5 seconds.
+# Run in foreground: ./count_loop.sh  (terminal is busy; use Ctrl-Z to pause, then bg to run in background)
+# Run in background: ./count_loop.sh &   then watch with: tail -f count_output.txt
+OUTFILE="${1:-count_output.txt}"
+count=0
+echo "Started at $(date). Writing to $OUTFILE every 5 seconds. Use Ctrl-Z to pause, Ctrl-C to stop." > "$OUTFILE"
+while true; do
+  ((count++))
+  echo "$(date '+%H:%M:%S') count=$count" >> "$OUTFILE"
+  sleep 5
+done
+COUNTEOF
+chmod +x "$CHAPTER6/count_loop.sh" 2>/dev/null || true
+
+# Chapter 7: ping, network, wget/sftp, archiving — practice files and directories
+CHAPTER7=~/playground/chapter7
+mkdir -p "$CHAPTER7"
+
+# Ping lesson: list of hosts for batch-style practice (ping -c 4 from script or manually)
+cat > "$CHAPTER7/hosts_to_ping.txt" << 'EOF'
+8.8.8.8
+google.com
+EOF
+
+# Wget/SFTP lesson: URLs for wget -i and sample files for SFTP get/put practice
+mkdir -p "$CHAPTER7/sftp_practice"
+cat > "$CHAPTER7/sftp_practice/urls_to_download.txt" << 'EOF'
+https://www.wccnet.edu/
+EOF
+cat > "$CHAPTER7/sftp_practice/important.txt" << 'EOF'
+Sample file for SFTP get/put practice.
+EOF
+cat > "$CHAPTER7/sftp_practice/report.txt" << 'EOF'
+Sample report for upload practice.
+EOF
+
+# Archiving lesson: files and directories for tar, gzip, zip examples
+ARCHIVE_DIR="$CHAPTER7/archiving"
+mkdir -p "$ARCHIVE_DIR"
+mkdir -p "$ARCHIVE_DIR/src" "$ARCHIVE_DIR/docs" "$ARCHIVE_DIR/logs"
+echo "Essay content for archiving practice." > "$ARCHIVE_DIR/essay.docx"
+echo "Research content." > "$ARCHIVE_DIR/research.pdf"
+cat > "$ARCHIVE_DIR/notes.txt" << 'EOF'
+Notes for archiving practice.
+EOF
+cat > "$ARCHIVE_DIR/README.md" << 'EOF'
+# Project
+Practice archive.
+EOF
+cat > "$ARCHIVE_DIR/src/main.sh" << 'EOF'
+#!/bin/bash
+echo "main"
+EOF
+cat > "$ARCHIVE_DIR/docs/guide.txt" << 'EOF'
+Guide content.
+EOF
+cat > "$ARCHIVE_DIR/logs/app.log" << 'EOF'
+log line 1
+log line 2
+EOF
+# Single file for gzip examples (compress one file, decompress)
+cat > "$ARCHIVE_DIR/large_file.txt" << 'EOF'
+Sample content for gzip practice. This file can be compressed with gzip and then decompressed with gzip -d.
+EOF
+echo "Report content." > "$ARCHIVE_DIR/report.docx"
+echo "col1,col2" > "$ARCHIVE_DIR/data.csv"
+touch "$ARCHIVE_DIR/images.jpg"
+
+# Chapter 8: Package management — no practice files; students use system apt/snap/flatpak
+CHAPTER8=~/playground/chapter8
+mkdir -p "$CHAPTER8"
+
+# Chapter 9: join, diff, tr practice files (cut/paste/join, comm/diff/patch, tr/sed/awk/aspell)
+CHAPTER9=~/playground/chapter9
+mkdir -p "$CHAPTER9"
+
+# join/cut/paste lesson: cut (students.csv), paste (names.txt, scores.txt, shopping.txt), join (students.txt, grades.txt, students_csv.txt, grades_csv.txt, employees.txt, projects.txt)
+cat > "$CHAPTER9/students.csv" << 'EOF'
+ID,First Name,Last Name,Major,GPA
+101,John,Doe,Computer Science,3.8
+102,Jane,Smith,Biology,3.9
+103,Mike,Johnson,Engineering,3.5
+EOF
+
+cat > "$CHAPTER9/names.txt" << 'EOF'
+John
+Jane
+Mike
+EOF
+
+cat > "$CHAPTER9/scores.txt" << 'EOF'
+85
+92
+78
+EOF
+
+cat > "$CHAPTER9/shopping.txt" << 'EOF'
+Apples
+Bananas
+Milk
+Bread
+Eggs
+Cheese
+EOF
+
+cat > "$CHAPTER9/students.txt" << 'EOF'
+101 John Doe
+102 Jane Smith
+103 Mike Johnson
+EOF
+
+cat > "$CHAPTER9/grades.txt" << 'EOF'
+101 A
+102 B
+103 B
+EOF
+
+cat > "$CHAPTER9/students_csv.txt" << 'EOF'
+101,John,Doe
+102,Jane,Smith
+103,Mike,Johnson
+EOF
+
+cat > "$CHAPTER9/grades_csv.txt" << 'EOF'
+101,A
+102,B
+103,B
+EOF
+
+cat > "$CHAPTER9/employees.txt" << 'EOF'
+alice Alice Smith
+bob Bob Jones
+charlie Charlie Brown
+EOF
+
+cat > "$CHAPTER9/projects.txt" << 'EOF'
+alice ProjectAlpha
+bob ProjectBeta
+EOF
+
+# diff/comm/patch lesson: comm (todo1.txt, todo2.txt), diff/patch (recipe_v1.txt, recipe_v2.txt)
+cat > "$CHAPTER9/todo1.txt" << 'EOF'
+buy groceries
+clean kitchen
+finish homework
+pay bills
+EOF
+
+cat > "$CHAPTER9/todo2.txt" << 'EOF'
+buy groceries
+call mom
+finish homework
+schedule dentist
+EOF
+
+cat > "$CHAPTER9/recipe_v1.txt" << 'EOF'
+Pancake Recipe
+--------------
+2 cups flour
+1 tablespoon sugar
+1 teaspoon salt
+2 eggs
+1 cup milk
+EOF
+
+cat > "$CHAPTER9/recipe_v2.txt" << 'EOF'
+Pancake Recipe
+--------------
+2 cups flour
+2 tablespoons sugar
+1 teaspoon baking powder
+1 teaspoon salt
+2 eggs
+1 1/2 cups milk
+EOF
+
+# tr/sed/awk/aspell lesson: tr (message.txt), sed (email.txt), awk (sales.csv), aspell (report.txt)
+cat > "$CHAPTER9/message.txt" << 'EOF'
+hello   world!
+this is SOME text with MiXeD case.
+too    many     spaces   here.
+EOF
+
+cat > "$CHAPTER9/email.txt" << 'EOF'
+Customer order #12345
+Thank you for your order.
+We will process your order soon.
+Contact: support@example.com
+EOF
+
+cat > "$CHAPTER9/sales.csv" << 'EOF'
+Item,Price,Quantity
+Widget,25,10
+Gadget,75,5
+Gizmo,50,20
+EOF
+
+cat > "$CHAPTER9/report.txt" << 'EOF'
+This is a sample report with some misspelled wrds.
+Check the contenet for errors.
+EOF
+
+# Chapter 10: Vim and Bash scripting — practice files and directories
+CHAPTER10=~/playground/chapter10
+mkdir -p "$CHAPTER10" "$CHAPTER10/scripting"
+
+# Vim lesson: files to open, edit, and use for multi-file/split examples
+cat > "$CHAPTER10/myfile.txt" << 'EOF'
+Hello, world!
+This is a file for practicing Vim.
+Use i to insert, Esc to return to Command mode.
+Try gg to go to the top, G to go to the bottom.
+EOF
+
+cat > "$CHAPTER10/file1.txt" << 'EOF'
+First file for Vim practice.
+Line two.
+Line three.
+EOF
+
+cat > "$CHAPTER10/file2.txt" << 'EOF'
+Second file for split-screen practice.
+EOF
+
+cat > "$CHAPTER10/file3.txt" << 'EOF'
+Third file for buffer and split examples.
+EOF
+
+# Bash lesson: foo.txt for variable/command-substitution example; scripting/ for navigation example
+cat > "$CHAPTER10/foo.txt" << 'EOF'
+Contents of foo.txt for command substitution.
+EOF
+
+# Chapter 11: Functions and conditionals — practice files for function (foo.txt) and if (data.txt)
+CHAPTER11=~/playground/chapter11
+mkdir -p "$CHAPTER11"
+
+# Functions lesson: comm() example reads foo.txt (output: "the contents of the foo file is ...")
+cat > "$CHAPTER11/foo.txt" << 'EOF'
+this is the foo.txt file text
+EOF
+
+# Conditionals lesson: file test operator (-f) example checks if data.txt exists
+cat > "$CHAPTER11/data.txt" << 'EOF'
+Sample data for the file test operator example.
+EOF
+
+# Chapter 12: Loops and arrays — practice file for loops (sometext.txt; arrays examples need no files)
+CHAPTER12=~/playground/chapter12
+mkdir -p "$CHAPTER12"
+
+# Loops lesson: "While loop processing a file character by character" reads sometext.txt (looks for "a")
+cat > "$CHAPTER12/sometext.txt" << 'EOF'
+sample text with a few a's for the character loop example
+EOF
+
+# Chapter 13: Strings/numbers and troubleshooting — practice files for examples
+CHAPTER13=~/playground/chapter13
+mkdir -p "$CHAPTER13"
+
+# Strings lesson: "Finding the longest word" and "Performance" examples use a file of words
+cat > "$CHAPTER13/file.txt" << 'EOF'
+apple banana cherry date elderberry fig grape
+hello world programming scripting bash shell
+internationalization documentation configuration
+one two three four five six seven eight nine ten
+EOF
+
+# Troubleshooting lesson: trace example shows "notes.txt has 42 lines" and "report.txt has 157 lines"
+for i in {1..42}; do echo "Line $i"; done > "$CHAPTER13/notes.txt"
+for i in {1..157}; do echo "Report line $i"; done > "$CHAPTER13/report.txt"
