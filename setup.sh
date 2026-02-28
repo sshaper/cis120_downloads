@@ -75,9 +75,66 @@ Line with    spaces
 Normal line
 EOF
 
-# Chapter 2: practice files and dirs for cp, mv, rm, wildcards, ln, less; FHS and disk_storage (df, du, lsblk, mount) use the live system — no extra practice files
+# Chapter 2: practice files and dirs for cp, mv, rm, wildcards, ln, less; cat and mkdir lessons; FHS and disk_storage (df, du, lsblk, mount) use the live system — no extra practice files
 CHAPTER2=~/playground/chapter2
 mkdir -p "$CHAPTER2"
+
+# cat and mkdir lessons (moved to chapter2): practice files for viewing, line numbers, multiple files, header/body/footer, debug
+cat > "$CHAPTER2/hello.txt" << 'EOF'
+Hello, World!
+This is my first file.
+EOF
+
+cat > "$CHAPTER2/file1.txt" << 'EOF'
+First file
+EOF
+
+cat > "$CHAPTER2/file2.txt" << 'EOF'
+Second file
+EOF
+
+cat > "$CHAPTER2/mixed.txt" << 'EOF'
+Line one
+
+Line three
+
+Line five
+EOF
+
+cat > "$CHAPTER2/special.txt" << 'EOF'
+Word1	Word2
+EOF
+
+cat > "$CHAPTER2/spaces.txt" << 'EOF'
+First line
+
+
+Second line
+
+
+Third line
+EOF
+
+cat > "$CHAPTER2/header.txt" << 'EOF'
+Header
+Title: My Report
+EOF
+
+cat > "$CHAPTER2/body.txt" << 'EOF'
+Body content here
+More details
+EOF
+
+cat > "$CHAPTER2/footer.txt" << 'EOF'
+Footer
+End of report
+EOF
+
+cat > "$CHAPTER2/debug.txt" << 'EOF'
+Line with tab	here
+Line with    spaces
+Normal line
+EOF
 
 cat > "$CHAPTER2/notes.txt" << 'EOF'
 My class notes
@@ -763,6 +820,13 @@ EOF
 cat > "$CHAPTER9/report.txt" << 'EOF'
 This is a sample report with some misspelled wrds.
 Check the contenet for errors.
+EOF
+
+# access.log for awk example (count requests by IP)
+cat > "$CHAPTER9/access.log" << 'EOF'
+192.168.1.1 - - [10/Oct/2025:13:55:36] "GET /page1 HTTP/1.1" 200 1234
+192.168.1.2 - - [10/Oct/2025:13:55:37] "GET /page2 HTTP/1.1" 404 567
+192.168.1.1 - - [10/Oct/2025:13:55:38] "POST /login HTTP/1.1" 200 890
 EOF
 
 # Chapter 10: Vim and Bash scripting — practice files and directories
