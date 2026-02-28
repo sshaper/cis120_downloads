@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install tree, locate (plocate), and find (findutils) if not already present.
+# Install tree, locate (plocate), find (findutils), and patch if not already present.
 # Safe to run multiple times: only runs the package manager when a command is missing.
 if ! command -v tree &>/dev/null; then
     sudo apt-get update -qq && sudo apt-get install -y tree
@@ -10,6 +10,25 @@ if ! command -v locate &>/dev/null; then
 fi
 if ! command -v find &>/dev/null; then
     sudo apt-get update -qq && sudo apt-get install -y findutils
+fi
+if ! command -v patch &>/dev/null; then
+    sudo apt-get update -qq && sudo apt-get install -y patch
+fi
+
+# Firewall: allow only SSH (port 22) inbound; allow only DNS, HTTP, and HTTPS outbound (apt, wget).
+# Allow port 22 before enabling so we don't lock out SSH.
+if ! command -v ufw &>/dev/null; then
+    sudo apt-get update -qq && sudo apt-get install -y ufw
+fi
+if command -v ufw &>/dev/null; then
+    sudo ufw allow 22/tcp comment 'SSH'
+    sudo ufw default deny incoming
+    sudo ufw default deny outgoing
+    sudo ufw allow out 53/udp comment 'DNS'
+    sudo ufw allow out 53/tcp comment 'DNS over TCP'
+    sudo ufw allow out 80/tcp comment 'HTTP apt/wget'
+    sudo ufw allow out 443/tcp comment 'HTTPS apt/wget'
+    sudo ufw --force enable
 fi
 
 mkdir -p ~/assignments/assignment{1..12}
