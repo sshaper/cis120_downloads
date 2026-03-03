@@ -31,9 +31,6 @@ if command -v ufw &>/dev/null; then
     sudo ufw --force enable
 fi
 
-mkdir -p ~/assignments/assignment{1..12}
-mkdir -p ~/playground/chapter{1..13}
-
 # Chapter 1: practice files for the cat command lesson (~/playground/chapter1
 CHAPTER1=~/playground/chapter1
 mkdir -p "$CHAPTER1"
