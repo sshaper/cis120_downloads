@@ -243,6 +243,12 @@ EOF
 
 touch "$CHAPTER2/empty_file"
 
+# Fake PDF (magic bytes so "file" reports PDF)
+printf '%%PDF-1.4\n%% Fake PDF for file command lesson. Not a real document.\n' > "$CHAPTER2/sample.pdf"
+
+# Fake JPEG (magic bytes so "file" reports JPEG image)
+printf '\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00' > "$CHAPTER2/sample.jpg"
+
 # Chapter 3: practice files for grep, pipelines, redirection, sort, tee
 CHAPTER3=~/playground/chapter3
 mkdir -p "$CHAPTER3"
