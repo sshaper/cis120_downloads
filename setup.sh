@@ -214,6 +214,35 @@ Line 19 - practice text for the less command.
 Line 20 - practice text for the less command.
 LONGEOF
 
+# file command lesson (chapter 2): practice files for file type detection
+cat > "$CHAPTER2/sample.sh" << 'EOF'
+#!/bin/bash
+# A sample script for the file command lesson
+echo "Hello from the script"
+EOF
+chmod +x "$CHAPTER2/sample.sh"
+
+cat > "$CHAPTER2/index.html" << 'EOF'
+<!DOCTYPE html>
+<html>
+<head><title>Sample</title></head>
+<body><p>Hello</p></body>
+</html>
+EOF
+
+cat > "$CHAPTER2/style.css" << 'EOF'
+body { margin: 0; }
+p { font-size: 1em; }
+EOF
+
+# File with no extension (shows that Linux looks at content, not extension)
+cat > "$CHAPTER2/readme" << 'EOF'
+This file has no extension.
+The file command will still identify it as text.
+EOF
+
+touch "$CHAPTER2/empty_file"
+
 # Chapter 3: practice files for grep, pipelines, redirection, sort, tee
 CHAPTER3=~/playground/chapter3
 mkdir -p "$CHAPTER3"
