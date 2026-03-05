@@ -190,30 +190,8 @@ cat > "$CHAPTER2/dir1/source.txt" << 'EOF'
 Source file for link example
 EOF
 
-# Long file for less command practice (many lines to scroll/search)
-cat > "$CHAPTER2/longfile.txt" << 'LONGEOF'
-Line 1 - practice text for the less command.
-Line 2 - practice text for the less command.
-Line 3 - practice text for the less command.
-Line 4 - practice text for the less command.
-Line 5 - practice text for the less command.
-Line 6 - practice text for the less command.
-Line 7 - practice text for the less command.
-Line 8 - practice text for the less command.
-Line 9 - practice text for the less command.
-Line 10 - practice text for the less command.
-Line 11 - practice text for the less command.
-Line 12 - practice text for the less command.
-Line 13 - practice text for the less command.
-Line 14 - practice text for the less command.
-Line 15 - practice text for the less command.
-Line 16 - practice text for the less command.
-Line 17 - practice text for the less command.
-Line 18 - practice text for the less command.
-Line 19 - practice text for the less command.
-Line 20 - practice text for the less command.
-LONGEOF
-
+# Long file for less command practice (output of ls -l /usr/bin on the server)
+ls -l /usr/bin > "$CHAPTER2/longfile.txt"
 # file command lesson (chapter 2): practice files for file type detection
 cat > "$CHAPTER2/sample.sh" << 'EOF'
 #!/bin/bash
