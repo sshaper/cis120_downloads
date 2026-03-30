@@ -721,31 +721,27 @@ touch "$ARCHIVE_DIR/images.jpg"
 CHAPTER8=~/playground/chapter8
 mkdir -p "$CHAPTER8"
 
-# Chapter 9: join, diff, tr practice files (cut/paste/join, comm/diff/patch, tr/sed/awk/aspell)
-CHAPTER9=~/playground/chapter9
-mkdir -p "$CHAPTER9"
-
 # join/cut/paste lesson: cut (students.csv), paste (names.txt, scores.txt, shopping.txt), join (students.txt, grades.txt, students_csv.txt, grades_csv.txt, employees.txt, projects.txt)
-cat > "$CHAPTER9/students.csv" << 'EOF'
+cat > "$CHAPTER8/students.csv" << 'EOF'
 ID,First Name,Last Name,Major,GPA
 101,John,Doe,Computer Science,3.8
 102,Jane,Smith,Biology,3.9
 103,Mike,Johnson,Engineering,3.5
 EOF
 
-cat > "$CHAPTER9/names.txt" << 'EOF'
+cat > "$CHAPTER8/names.txt" << 'EOF'
 John
 Jane
 Mike
 EOF
 
-cat > "$CHAPTER9/scores.txt" << 'EOF'
+cat > "$CHAPTER8/scores.txt" << 'EOF'
 85
 92
 78
 EOF
 
-cat > "$CHAPTER9/shopping.txt" << 'EOF'
+cat > "$CHAPTER8/shopping.txt" << 'EOF'
 Apples
 Bananas
 Milk
@@ -754,57 +750,57 @@ Eggs
 Cheese
 EOF
 
-cat > "$CHAPTER9/students.txt" << 'EOF'
+cat > "$CHAPTER8/students.txt" << 'EOF'
 101 John Doe
 102 Jane Smith
 103 Mike Johnson
 EOF
 
-cat > "$CHAPTER9/grades.txt" << 'EOF'
+cat > "$CHAPTER8/grades.txt" << 'EOF'
 101 A
 102 B
 103 B
 EOF
 
-cat > "$CHAPTER9/students_csv.txt" << 'EOF'
+cat > "$CHAPTER8/students_csv.txt" << 'EOF'
 101,John,Doe
 102,Jane,Smith
 103,Mike,Johnson
 EOF
 
-cat > "$CHAPTER9/grades_csv.txt" << 'EOF'
+cat > "$CHAPTER8/grades_csv.txt" << 'EOF'
 101,A
 102,B
 103,B
 EOF
 
-cat > "$CHAPTER9/employees.txt" << 'EOF'
+cat > "$CHAPTER8/employees.txt" << 'EOF'
 alice Alice Smith
 bob Bob Jones
 charlie Charlie Brown
 EOF
 
-cat > "$CHAPTER9/projects.txt" << 'EOF'
+cat > "$CHAPTER8/projects.txt" << 'EOF'
 alice ProjectAlpha
 bob ProjectBeta
 EOF
 
 # diff/comm/patch lesson: comm (todo1.txt, todo2.txt), diff/patch (recipe_v1.txt, recipe_v2.txt)
-cat > "$CHAPTER9/todo1.txt" << 'EOF'
+cat > "$CHAPTER8/todo1.txt" << 'EOF'
 buy groceries
 clean kitchen
 finish homework
 pay bills
 EOF
 
-cat > "$CHAPTER9/todo2.txt" << 'EOF'
+cat > "$CHAPTER8/todo2.txt" << 'EOF'
 buy groceries
 call mom
 finish homework
 schedule dentist
 EOF
 
-cat > "$CHAPTER9/recipe_v1.txt" << 'EOF'
+cat > "$CHAPTER8/recipe_v1.txt" << 'EOF'
 Pancake Recipe
 --------------
 2 cups flour
@@ -814,7 +810,7 @@ Pancake Recipe
 1 cup milk
 EOF
 
-cat > "$CHAPTER9/recipe_v2.txt" << 'EOF'
+cat > "$CHAPTER8/recipe_v2.txt" << 'EOF'
 Pancake Recipe
 --------------
 2 cups flour
@@ -826,37 +822,91 @@ Pancake Recipe
 EOF
 
 # tr/sed/awk/aspell lesson: tr (message.txt), sed (email.txt), awk (sales.csv), aspell (report.txt)
-cat > "$CHAPTER9/message.txt" << 'EOF'
+cat > "$CHAPTER8/message.txt" << 'EOF'
 hello   world!
 this is SOME text with MiXeD case.
 too    many     spaces   here.
 EOF
 
-cat > "$CHAPTER9/email.txt" << 'EOF'
+cat > "$CHAPTER8/email.txt" << 'EOF'
 Customer order #12345
 Thank you for your order.
 We will process your order soon.
 Contact: support@example.com
 EOF
 
-cat > "$CHAPTER9/sales.csv" << 'EOF'
+cat > "$CHAPTER8/sales.csv" << 'EOF'
 Item,Price,Quantity
 Widget,25,10
 Gadget,75,5
 Gizmo,50,20
 EOF
 
-cat > "$CHAPTER9/report.txt" << 'EOF'
+cat > "$CHAPTER8/report.txt" << 'EOF'
 This is a sample report with some misspelled wrds.
 Check the contenet for errors.
 EOF
 
 # access.log for awk example (count requests by IP)
-cat > "$CHAPTER9/access.log" << 'EOF'
+cat > "$CHAPTER8/access.log" << 'EOF'
 192.168.1.1 - - [10/Oct/2025:13:55:36] "GET /page1 HTTP/1.1" 200 1234
 192.168.1.2 - - [10/Oct/2025:13:55:37] "GET /page2 HTTP/1.1" 404 567
 192.168.1.1 - - [10/Oct/2025:13:55:38] "POST /login HTTP/1.1" 200 890
 EOF
+
+
+
+# Chapter 9: join, diff, tr practice files (cut/paste/join, comm/diff/patch, tr/sed/awk/aspell)
+CHAPTER9=~/playground/chapter9
+mkdir -p "$CHAPTER9"
+
+# Chapter 9 (after swapping with Chapter 8): disk + logs snapshots
+# These files are useful for explaining why you would use `diff` and `sed`
+# when working with “before vs after” disk usage and log output.
+cat > "$CHAPTER9/df_before.txt" << 'EOF'
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        20G   12G  6.8G  64% /
+/dev/sda2        50G   10G   38G  21% /home
+EOF
+
+cat > "$CHAPTER9/df_after.txt" << 'EOF'
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        20G   19G  512M  98% /
+/dev/sda2        50G   10G   38G  21% /home
+EOF
+
+cat > "$CHAPTER9/du_var_before.txt" << 'EOF'
+120M	/var/cache
+40M	/var/lib
+12M	/var/log
+EOF
+
+cat > "$CHAPTER9/du_var_after.txt" << 'EOF'
+50M	/var/cache
+2.0G	/var/lib
+1.7G	/var/log
+EOF
+
+# Simulated journalctl output (text snapshots for `diff`)
+cat > "$CHAPTER9/journal_before.txt" << 'EOF'
+Mar 20 09:55:01 server systemd[1]: Started Daily Cleanup of Temporary Directories.
+Mar 20 09:56:10 server sshd[421]: Accepted password for admin from 192.168.1.50 port 45211 ssh2
+Mar 20 09:57:22 server httpd[510]: AH00558: httpd: Could not reliably determine the server's fully qualified domain name
+EOF
+
+cat > "$CHAPTER9/journal_after.txt" << 'EOF'
+Mar 20 10:02:14 server systemd[1]: Started Session 42 of user admin.
+Mar 20 10:03:08 server sshd[421]: Failed password for admin from 192.168.1.50 port 45222 ssh2 ERROR
+Mar 20 10:04:41 server systemd[1]: ERROR: no space left on device while writing /var/log/messages
+Mar 20 10:05:09 server httpd[510]: ERROR: mod_wsgi: Failed to spawn process (disk full)
+EOF
+
+# A single “after” log file for `sed` extraction examples.
+# Students can do something like: sed -n '/ERROR/p' journal_after.txt
+cp "$CHAPTER9/journal_after.txt" "$CHAPTER9/journal_after_errors.txt"
+
+
+
 
 # Chapter 10: Vim and Bash scripting — practice files and directories
 CHAPTER10=~/playground/chapter10
