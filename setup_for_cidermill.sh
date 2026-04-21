@@ -365,10 +365,16 @@ Jane
 EOF
 
 cat > "$CHAPTER3/numbers.txt" << 'EOF'
+100
 10
-20
+35
+1
 30
+3
 40
+400
+20
+2
 EOF
 
 cat > "$CHAPTER3/items.txt" << 'EOF'
