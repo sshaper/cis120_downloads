@@ -315,10 +315,33 @@ cat > "$CHAPTER3/app.log" << 'EOF'
 2024-01-01 10:15:12 Operation completed
 EOF
 
-cat > "$CHAPTER3/server.log" << 'EOF'
-2024-01-01 10:20:30 error: Timeout occurred
-2024-01-01 10:25:55 Request processed
-2024-01-01 10:30:18 error: Connection failed
+cat > "$CHAPTER3/server1.log" << 'EOF'
+2024-01-01 10:00:00 Server started
+2024-01-01 10:05:23 User connected
+2024-01-01 10:10:45 Request processed
+2024-01-01 10:15:12 Error occurred
+2024-01-01 10:20:30 User disconnected
+2024-01-01 10:25:55 New connection
+2024-01-01 10:30:18 Request completed
+2024-01-01 10:35:42 Server status OK
+2024-01-01 10:40:15 Warning logged
+2024-01-01 10:45:00 Server shutdown
+EOF
+
+cat > "$CHAPTER3/server2.log" << 'EOF'
+Log 1 entry 1
+Log 1 entry 2
+Log 1 entry 3
+Log 1 entry 4
+Log 1 entry 5
+EOF
+
+cat > "$CHAPTER3/server3.log" << 'EOF'
+Log 2 entry 1
+Log 2 entry 2
+Log 2 entry 3
+Log 2 entry 4
+Log 2 entry 5
 EOF
 
 cat > "$CHAPTER3/data.csv" << 'EOF'
@@ -488,6 +511,41 @@ Line two modified
 Line three
 Line five
 EOF
+
+cat > "$CHAPTER3/headtail1.txt" << 'EOF'
+Line 1: Introduction
+Line 2: Getting Started
+Line 3: Basic Concepts
+Line 4: Advanced Topics
+Line 5: Examples
+Line 6: Practice Exercises
+Line 7: Common Mistakes
+Line 8: Best Practices
+Line 9: Tips and Tricks
+Line 10: Summary
+Line 11: Additional Resources
+Line 12: Conclusion
+Line 13: References
+Line 14: Appendix A
+Line 15: Appendix B
+EOF
+
+cat > "$CHAPTER3/headtail2.txt" << 'EOF'
+First file line 1
+First file line 2
+First file line 3
+First file line 4
+First file line 5
+EOF
+
+cat > "$CHAPTER3/headtail3.txt" << 'EOF'
+Second file line 1
+Second file line 2
+Second file line 3
+Second file line 4
+Second file line 5
+EOF
+
 
 # Chapter 4: practice files for expansion lesson (pathname, tilde, brace examples)
 CHAPTER4=~/playground/chapter4

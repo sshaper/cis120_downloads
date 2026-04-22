@@ -421,6 +421,7 @@ banana
 apple
 orange
 banana
+apple
 cherry
 EOF
 
@@ -444,16 +445,6 @@ March
 December
 February
 June
-EOF
-
-cat > "$CHAPTER3/unsorted_dupes.txt" << 'EOF'
-apple
-banana
-apple
-orange
-banana
-apple
-cherry
 EOF
 
 # tee: original.txt, data_tee.txt (with errors for filtering), file_tee.txt (duplicates), diff1.txt, diff2.txt
