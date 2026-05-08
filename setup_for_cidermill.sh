@@ -726,6 +726,9 @@ EOF
 mkdir -p "$CHAPTER7/sftp_practice"
 cat > "$CHAPTER7/sftp_practice/urls_to_download.txt" << 'EOF'
 https://www.wccnet.edu/
+https://httpbin.org/json
+https://httpbin.org/image/png
+https://raw.githubusercontent.com/feross/ieee754/master/package.json
 EOF
 cat > "$CHAPTER7/sftp_practice/important.txt" << 'EOF'
 Sample file for SFTP get/put practice.
