@@ -700,13 +700,13 @@ mkdir -p "$CHAPTER5"
 cat > "$CHAPTER5/file1.txt" << 'EOF'
 Practice file for permissions and chmod lessons.
 EOF
-
+chmod 644 "$CHAPTER5/file1.txt" 2>/dev/null || true
 
 # file2.txt: chmod u+w adds owner write (quiz question 6; owner starts without write)
 cat > "$CHAPTER5/file2.txt" << 'EOF'
 Practice file for adding owner write permission.
 EOF
-
+chmod 444 "$CHAPTER5/file2.txt" 2>/dev/null || true
 
 # project.txt: chown student2 (quiz question 11; students write the sudo command only)
 cat > "$CHAPTER5/project.txt" << 'EOF'
