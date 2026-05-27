@@ -692,6 +692,27 @@ chmod +x "$LOCATE_FIND/run_me" 2>/dev/null || true
 
 # Reminder: run "sudo updatedb" after setup so locate finds these files
 
+# Chapter 5: permissions, id, chmod, umask, user/group, chown — practice files for chapter 5 quiz
+CHAPTER5=~/playground/chapter5
+mkdir -p "$CHAPTER5"
+
+# file1.txt: ls -l and chmod 755 (quiz questions 4–5)
+cat > "$CHAPTER5/file1.txt" << 'EOF'
+Practice file for permissions and chmod lessons.
+EOF
+
+
+# file2.txt: chmod u+w adds owner write (quiz question 6; owner starts without write)
+cat > "$CHAPTER5/file2.txt" << 'EOF'
+Practice file for adding owner write permission.
+EOF
+
+
+# project.txt: chown student2 (quiz question 11; students write the sudo command only)
+cat > "$CHAPTER5/project.txt" << 'EOF'
+Shared project file for ownership examples.
+EOF
+
 # Chapter 6: jobs, fg, bg lesson — script that writes a count to a file every 5 seconds
 # Students run it in foreground (fg) or background (bg) and watch the output file to see the difference.
 CHAPTER6=~/playground/chapter6
