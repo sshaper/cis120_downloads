@@ -225,6 +225,10 @@ cat > "$CHAPTER3/file1.txt" << 'EOF'
 This is an important document.
 It contains important information.
 Some lines are not important.
+Other lines are important.
+It is best to read this file carefully.
+Or else you may miss important information.
+This ends the file.
 EOF
 
 cat > "$CHAPTER3/file2.txt" << 'EOF'
