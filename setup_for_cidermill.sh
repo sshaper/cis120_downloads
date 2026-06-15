@@ -922,6 +922,7 @@ EOF
 cat > "$CHAPTER8/report.txt" << 'EOF'
 This is a sample report with some misspelled wrds.
 Check the contenet for errors.
+there are some digits like 2 and 3 and 9
 EOF
 
 # access.log for awk example (count requests by IP)
